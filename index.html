@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Samples</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f9fbff;
+            color: #333;
+        }
+        
+        .work-samples-heading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #1d4ed8;
+        }
+        
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+        
+        .media-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .media-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 0.75rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .media-item:hover .media-info {
+            transform: translateY(0);
+        }
+        
+        .header-glow {
+            text-shadow: 0 0 10px rgba(29, 78, 216, 0.3);
+        }
+        
+        .github-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        /* Video styles */
+        .video-container {
+            position: relative;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .play-button:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .play-button svg {
+            width: 24px;
+            height: 24px;
+            margin-left: 4px; /* Slight offset for play icon */
+        }
+        
+        /* Lightbox styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-video {
+            max-width: 100%;
+            max-height: 90vh;
+            display: none;
+            margin: 0 auto;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        
+        /* Footer space */
+        .footer-space {
+            height: 100px;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="work-samples-heading font-bold">Work Samples</h1>
+        </header>
+        
+        <!-- Masonry Layout -->
+        <div id="masonry-layout" class="masonry-grid">
+            <!-- Social Posts (1200x1200) -->
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/BTF.gif" data-caption="Social Media Post - BTF">
+                    <div style="aspect-ratio: 1/1;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/BTF.gif" alt="Social Post 1" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Social Media Post - BTF</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1200 × 1200 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Constellation%20Prize.gif" data-caption="Social Media Post - Constellation Prize">
+                    <div style="aspect-ratio: 1/1;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Constellation%20Prize.gif" alt="Social Post 2" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Social Media Post - Constellation Prize</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1200 × 1200 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Gif%20Social%20Post%20Astronaut.gif" data-caption="Social Media Post - Astronaut">
+                    <div style="aspect-ratio: 1/1;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Gif%20Social%20Post%20Astronaut.gif" alt="Social Post 3" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Social Media Post - Astronaut</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1200 × 1200 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Drink Ticket (900x300) -->
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%202023%20Drink%20Ticket.png" data-caption="Event Drink Ticket">
+                    <div style="aspect-ratio: 900/300;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%202023%20Drink%20Ticket.png" alt="Drink Ticket" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Event Drink Ticket</p>
+                        <p class="text-xs text-gray-300">Dimensions: 900 × 300 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Launch.jpg" data-caption="Social Media Post - Launch">
+                    <div style="aspect-ratio: 1/1;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Launch.jpg" alt="Social Post 4" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Social Media Post - Launch</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1200 × 1200 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video (16:9) -->
+            <div class="masonry-item">
+                <div class="media-item video-item" data-video-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/teaserbytetofuturecuc.mp4" data-caption="Conference Video - Teaser">
+                    <div class="video-container" style="aspect-ratio: 16/9;">
+                        <video id="conference-video" poster="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUCPanel.jpg">
+                            <source src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/teaserbytetofuturecuc.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="play-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Video</p>
+                        <p class="text-xs text-gray-300">Teaser Video</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Outer%20Space.gif" data-caption="Social Media Post - Outer Space">
+                    <div style="aspect-ratio: 1/1;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Outer%20Space.gif" alt="Social Post 5" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Social Media Post - Outer Space</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1200 × 1200 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conference Photos (1704x983) -->
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%20Crowd.jpg" data-caption="Conference Photo - Crowd">
+                    <div style="aspect-ratio: 1704/983;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%20Crowd.jpg" alt="Conference Photo 1" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Photo - Crowd</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1704 × 983 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Planet%20Camera.gif" data-caption="Social Media Post - Planet Camera">
+                    <div style="aspect-ratio: 1/1;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Planet%20Camera.gif" alt="Social Post 6" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Social Media Post - Planet Camera</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1200 × 1200 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%20Game.jpg" data-caption="Conference Photo - Game">
+                    <div style="aspect-ratio: 1704/983;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%20Game.jpg" alt="Conference Photo 2" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Photo - Game</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1704 × 983 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%20Magician.jpg" data-caption="Conference Photo - Magician">
+                    <div style="aspect-ratio: 1704/983;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUC%20Magician.jpg" alt="Conference Photo 3" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Photo - Magician</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1704 × 983 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUCPanel.jpg" data-caption="Conference Photo - Panel">
+                    <div style="aspect-ratio: 1704/983;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/CUCPanel.jpg" alt="Conference Photo 4" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Photo - Panel</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1704 × 983 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/cuc%20breakout%20room.jpg" data-caption="Conference Photo - Breakout Room">
+                    <div style="aspect-ratio: 1704/983;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/cuc%20breakout%20room.jpg" alt="Conference Photo 5" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Photo - Breakout Room</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1704 × 983 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/cuc%20one%20on%20one.jpg" data-caption="Conference Photo - One on One">
+                    <div style="aspect-ratio: 1704/983;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/cuc%20one%20on%20one.jpg" alt="Conference Photo 6" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Conference Photo - One on One</p>
+                        <p class="text-xs text-gray-300">Dimensions: 1704 × 983 px</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Registration Instructions (902x634) - Moved to bottom -->
+            <div class="masonry-item">
+                <div class="media-item overflow-hidden" data-src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Registration%20Instructions.png" data-caption="Registration Document">
+                    <div style="aspect-ratio: 902/634;">
+                        <img src="https://github.com/TeslaCadena/BytetoFutureImages/raw/main/Registration%20Instructions.png" alt="Registration Instructions" class="github-img">
+                    </div>
+                    <div class="media-info">
+                        <p class="text-sm font-medium text-white">Registration Document</p>
+                        <p class="text-xs text-gray-300">Dimensions: 902 × 634 px</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Extra space at the bottom -->
+        <div class="footer-space"></div>
+        
+        <!-- Lightbox -->
+        <div class="lightbox">
+            <div class="lightbox-content">
+                <button class="lightbox-close">&times;</button>
+                <img src="" alt="Lightbox Image" class="lightbox-img">
+                <video class="lightbox-video" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="lightbox-caption"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Lightbox functionality
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const lightboxVideo = document.querySelector('.lightbox-video');
+        const lightboxCaption = document.querySelector('.lightbox-caption');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const mediaItems = document.querySelectorAll('.media-item[data-src]');
+        const videoItems = document.querySelectorAll('.media-item[data-video-src]');
+        
+        // For images
+        mediaItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.getAttribute('data-src');
+                const caption = item.getAttribute('data-caption');
+                
+                // Show image, hide video
+                lightboxImg.style.display = 'block';
+                lightboxVideo.style.display = 'none';
+                lightboxVideo.pause();
+                
+                lightboxImg.src = imgSrc;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('active');
+                
+                // Prevent body scrolling when lightbox is open
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // For videos
+        videoItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const videoSrc = item.getAttribute('data-video-src');
+                const caption = item.getAttribute('data-caption');
+                
+                // Show video, hide image
+                lightboxImg.style.display = 'none';
+                lightboxVideo.style.display = 'block';
+                
+                lightboxVideo.src = videoSrc;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('active');
+                
+                // Auto play the video
+                lightboxVideo.play();
+                
+                // Prevent body scrolling when lightbox is open
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            // Pause video if playing
+            lightboxVideo.pause();
+            // Re-enable body scrolling
+            document.body.style.overflow = '';
+        });
+        
+        // Close lightbox when clicking outside the content
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                // Pause video if playing
+                lightboxVideo.pause();
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                // Pause video if playing
+                lightboxVideo.pause();
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Video thumbnail play button functionality
+        const videoContainer = document.querySelector('.video-container');
+        const playButton = document.querySelector('.play-button');
+        
+        // Make the play button trigger the lightbox instead of playing in place
+        videoContainer.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent double triggering
+            const videoItem = videoContainer.closest('.video-item');
+            if (videoItem) {
+                const event = new Event('click');
+                videoItem.dispatchEvent(event);
+            }
+        });
+    </script>
+</body>
+</html>
